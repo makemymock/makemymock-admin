@@ -1,0 +1,23 @@
+# Aggregator gitignore for the Admin workspace.
+# Subfolder gitignores (`backend/.gitignore`, `frontend/.gitignore`) cover
+# the per-stack rules; this file catches OS / editor artefacts that can
+# land at the workspace root.
+
+# ---- Env / secrets ----
+.env
+.env.*
+!.env.example
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Editors ----
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ---- Logs ----
+*.log

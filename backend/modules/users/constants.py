@@ -1,0 +1,4 @@
+USERS_COLLECTION = "users"
+STUDENT_PROFILES_COLLECTION = "student_profiles"
+MOCK_TEST_SESSIONS_COLLECTION = "mock_test_sessions"
+BATTLES_COLLECTION = "battles"

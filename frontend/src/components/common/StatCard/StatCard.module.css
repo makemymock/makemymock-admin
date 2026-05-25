@@ -1,0 +1,47 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.accent_teal::before { background: var(--color-primary); }
+.accent_gold::before { background: var(--color-warning); }
+.accent_blue::before { background: #3b82f6; }
+.accent_purple::before { background: #8b5cf6; }
+.accent_red::before { background: var(--color-danger); }
+
+.label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  color: var(--color-text-subtle);
+}
+
+.value {
+  margin: 0 0 4px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
