@@ -1,32 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
   <title>{{ subject }}</title>
 </head>
-<body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:24px 0;">
+<body style="margin:0;padding:0;background:#eef1f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,Helvetica,sans-serif;color:#0f172a;-webkit-font-smoothing:antialiased;">
+
+  <!-- Preheader: shown as the inbox preview snippet. -->
+  <div style="display:none;font-size:1px;color:#eef1f6;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">
+    {{ subject }} — from {{ app_name }}.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+         style="background:#eef1f6;padding:32px 16px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="560" cellpadding="0" cellspacing="0"
-               style="background:#ffffff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);overflow:hidden;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+               style="max-width:600px;width:100%;background:#ffffff;border-radius:18px;
+                      box-shadow:0 1px 2px rgba(15,23,42,0.04),0 8px 28px rgba(15,23,42,0.08);overflow:hidden;">
+
+          <!-- Hero header -->
           <tr>
-            <td style="padding:24px 32px;background:#0d9678;color:#ffffff;">
-              <h1 style="margin:0;font-size:20px;letter-spacing:0.5px;">{{ app_name }}</h1>
+            <td style="background:#0f172a;background-image:linear-gradient(135deg,#0f172a 0%,#0a7c63 140%);
+                       padding:28px 32px;text-align:center;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+                <tr>
+                  <td style="background:#0d9678;color:#ffffff;font-weight:800;font-size:14px;
+                             letter-spacing:1.2px;padding:10px 14px;border-radius:10px;">
+                    MM
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:14px 0 4px;color:#ffffff;font-weight:700;font-size:17px;letter-spacing:0.3px;">
+                {{ app_name }}
+              </p>
+              <p style="margin:0;color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:1.6px;">
+                Mock&nbsp;·&nbsp;Analyse&nbsp;·&nbsp;Succeed
+              </p>
             </td>
           </tr>
+
+          <!-- Headline strip — mirrors the dark chip-rail used inside the app. -->
           <tr>
-            <td style="padding:32px;color:#0f172a;font-size:15px;line-height:1.6;">
-              <h2 style="margin:0 0 16px;font-size:20px;color:#0f172a;">{{ subject }}</h2>
-              {{ content_html | safe }}
+            <td style="padding:0 32px;background:#ffffff;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                     style="margin:28px 0 0;">
+                <tr>
+                  <td style="background:#0f172a;border-radius:14px;padding:18px 22px;">
+                    <p style="margin:0 0 4px;color:#94a3b8;font-size:10px;font-weight:700;
+                              text-transform:uppercase;letter-spacing:2px;">
+                      Announcement
+                    </p>
+                    <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;line-height:1.35;">
+                      {{ subject }}
+                    </h1>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
+
+          <!-- Body content (admin-supplied) -->
           <tr>
-            <td style="padding:18px 32px;background:#f8fafc;color:#64748b;font-size:12px;text-align:center;">
-              You're receiving this from <strong>{{ app_name }}</strong>.<br/>
-              &copy; {{ app_name }}
+            <td style="padding:24px 32px 32px;">
+              <div style="color:#334155;font-size:15px;line-height:1.7;">
+                {{ content_html | safe }}
+              </div>
             </td>
           </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:18px 32px 22px;border-top:1px solid #e2e8f0;background:#f8fafc;">
+              <p style="margin:0 0 4px;color:#475569;font-size:12px;text-align:center;">
+                You're receiving this from <strong style="color:#0f172a;">{{ app_name }}</strong> because you signed up for an account.
+              </p>
+              <p style="margin:0;color:#94a3b8;font-size:11px;text-align:center;">
+                &copy; {{ app_name }} · All rights reserved
+              </p>
+            </td>
+          </tr>
+
         </table>
       </td>
     </tr>
