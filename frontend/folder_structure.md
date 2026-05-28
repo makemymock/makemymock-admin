@@ -84,6 +84,7 @@ Reusable, presentational primitives. Receive everything via props.
 | `Loader` | Spinner. `fullscreen` prop for overlay mode. |
 | `ErrorMessage` | Tinted error pill. |
 | `StatCard` | Headline + value + sub-label for the dashboard. |
+| `MarkdownText` | Renders Markdown + GFM + KaTeX. Used by the email composer body + preview, and by question solutions. |
 
 ### `components/layout/`
 - `AdminShell` — sidebar nav + `<Outlet>` for protected pages. Holds the

@@ -63,6 +63,7 @@ Same hard rules as the Client frontend (see [frontend/folder_structure.md](front
 - Pages own their CSS module (`<page>.module.css`, lowercase).
 - Env vars start with `VITE_`, live in both `.env` and `.env.example`, are read only inside `services/`.
 - The CSV download in [services/userService.js](frontend/src/services/userService.js) uses native `fetch()` so the browser streams the body straight to disk instead of buffering through axios.
+- The Email Composer ([pages/email/EmailComposer.jsx](frontend/src/pages/email/EmailComposer.jsx)) renders the body through `MarkdownText` and a live `<iframe srcDoc>` preview matching the server-side template, so what the admin sees is what recipients receive.
 
 ## Operational notes
 
