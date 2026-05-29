@@ -44,6 +44,7 @@ Same conventions as the Client backend (see [backend/folder_structure.md](backen
 - Admin identity is **single-tenant via env vars** — `ADMIN_EMAIL` + `ADMIN_PASSWORD_HASH` (preferred) or `ADMIN_PASSWORD`. Tokens are stamped with `role=admin` so a Client token cannot be reused here.
 - Two Mongo handles: the primary DB (`MONGO_DB_NAME`, e.g. `makemymock`) and the catalog DB (`MONGO_QUESTIONS_DB_NAME`, e.g. `bbd_db`).
 - The admin owns **no indexes**. The Client backend's `_ensure_indexes()` already covers every collection this service reads.
+- Admin is **read-mostly** except for the `contests` collection, which the `contest/` module writes to (admin schedules contests; Client serves participants). Any other shared collection is read-only here.
 
 Modules:
 - `authentication/` — `/auth/login`, `/auth/refresh-token`, `/auth/me`.
@@ -51,6 +52,7 @@ Modules:
 - `users/` — `/users` (list), `/users/{id}` (detail), `/users/export.csv` (one-click CSV), `/users/emails` (used by the promo composer).
 - `promotional_email/` — `/promo-emails/preview`, `/promo-emails/send`. Bounded concurrency; per-recipient results in the response.
 - `questions/` — `/questions/catalog`, `/questions`, `/questions/{id}`. Heterogeneous source documents are normalised in the service before the schema sees them.
+- `contest/` — admin CRUD for scheduled contests. `/contests/default-rules` returns the prefill markdown template; `POST /contests` validates no time overlap against existing scheduled/live contests; `PATCH` and `DELETE` are locked once a contest starts. `/contests/{id}/participants` returns the leaderboard-ordered participants view (read-only — Client backend owns `contest_participations`).
 
 ## Frontend architecture
 
@@ -78,5 +80,9 @@ Read-only from this service:
 - `users`, `student_profiles`, `email_otps` (auth domain — read for stats and listing).
 - `mock_test_sessions`, `battles` (per-user activity counters).
 - `questions` (catalog — lives in `MONGO_QUESTIONS_DB_NAME`).
+- `contest_participations` (read-only — Client backend owns writes; admin reads it for the participants view).
 
-The mock-test detailed collections (`mock_test_responses`, `mock_test_topics`, `user_topic_attempts`, the id-map collections) are **off-limits to this service** — they're owned by the Client's `modules/mock_test/`. If you need their data here, hit the Client's HTTP API instead of reading the collections directly.
+Read + write:
+- `contests` — admin schedules contests here. Indexes live in the Client backend's `_ensure_indexes()`.
+
+The mock-test detailed collections (`mock_test_responses`, `mock_test_topics`, `user_topic_attempts`, the id-map collections) and the contest responses (`contest_responses`) are **off-limits to this service** — they're owned by the Client backend. If you need their data here, hit the Client's HTTP API instead of reading the collections directly.

@@ -22,7 +22,9 @@ frontend/
 │   │   ├── dashboard/
 │   │   ├── users/
 │   │   ├── email/
-│   │   └── questions/
+│   │   ├── questions/
+│   │   └── contests/            # Contests.jsx (list) + ContestForm.jsx
+│   │                             #   (create / edit + question picker)
 │   ├── routes/
 │   │   ├── AppRoutes.jsx
 │   │   └── ProtectedRoute.jsx
@@ -32,7 +34,8 @@ frontend/
 │   │   ├── statsService.js
 │   │   ├── userService.js
 │   │   ├── emailService.js
-│   │   └── questionService.js
+│   │   ├── questionService.js
+│   │   └── contestService.js
 │   ├── utils/
 │   │   ├── token.js             # localStorage wrapper (`mmma_*` keys)
 │   │   └── validators.js
@@ -106,6 +109,8 @@ One folder per route, owns its own CSS module.
 | `UserDetail` | `/users/:userId` *(protected)* | Single user — profile, session/battle counts. |
 | `EmailComposer` | `/email` *(protected)* | Subject + body + recipients list with **Load all users**, live iframe preview, dispatch. |
 | `Questions` | `/questions` *(protected)* | Subject → chapter → topic dropdowns, type + difficulty filters, free-text search. Renders each question with correct answers highlighted in green. |
+| `Contests` | `/contests` *(protected)* | List of every scheduled / live / completed contest with status badges + participant count. Edit and delete actions; delete is hidden once the contest starts. |
+| `ContestForm` | `/contests/new`, `/contests/:id` *(protected)* | Create + edit. Fields: title, description, start datetime (local), duration, marking scheme, rules markdown (prefilled from `/contests/default-rules`, with live `{question_count}` / `{duration_minutes}` / `{marks_*}` token substitution). Embedded question picker reuses the catalog filters from `questionService` and filters passages out. Right pane shows running summary + selected list with remove buttons. |
 
 ### `routes/`
 - `AppRoutes.jsx` — central `<Routes>` block. All protected pages share an

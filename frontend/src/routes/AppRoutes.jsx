@@ -5,6 +5,8 @@ import Users from '../pages/users/Users';
 import UserDetail from '../pages/users/UserDetail';
 import EmailComposer from '../pages/email/EmailComposer';
 import Questions from '../pages/questions/Questions';
+import Contests from '../pages/contests/Contests';
+import ContestForm from '../pages/contests/ContestForm';
 import ProtectedRoute from './ProtectedRoute';
 import { tokenStorage } from '../utils/token';
 import AdminShell from '../components/layout/AdminShell';
@@ -42,6 +44,9 @@ const AppRoutes = () => {
         <Route path="/users/:userId" element={<UserDetail />} />
         <Route path="/email" element={<EmailComposer />} />
         <Route path="/questions" element={<Questions />} />
+        <Route path="/contests" element={<Contests />} />
+        <Route path="/contests/new" element={<ContestForm />} />
+        <Route path="/contests/:contestId" element={<ContestForm />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

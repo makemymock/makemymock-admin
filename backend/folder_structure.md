@@ -18,7 +18,10 @@ backend/
 │   ├── stats/            # Dashboard overview counters + signup trend
 │   ├── users/            # User listing, detail, CSV export
 │   ├── promotional_email/# Mass email composer + dispatcher
-│   └── questions/        # Catalog browser (subject → chapter → topic → Q)
+│   ├── questions/        # Catalog browser (subject → chapter → topic → Q)
+│   └── contest/          # Scheduled contests: CRUD + read-only participants view.
+│                         #   Writes go to `contests`; reads from `contest_participations`
+│                         #   (Client backend owns the writes there).
 ├── services/             # Reserved for cross-module orchestration services
 ├── main.py               # FastAPI app factory + lifespan + global handlers
 ├── requirements.txt
@@ -110,6 +113,17 @@ battles, questions) plus a 30-day signup trend padded to a continuous date axis.
 - `GET /questions/catalog` — subject → chapter → topic tree with counts.
 - `GET /questions` — filtered list (subject, chapter, topic, question_type, difficulty, free-text). Each item already has options marked `is_correct=true` so the UI doesn't have to reconcile.
 - `GET /questions/{id}` — single question with all options, correct answers, and solution.
+
+### `contest`
+- `GET /contests/default-rules` — default Markdown template the form prefills.
+- `GET /contests` — every contest, newest start first, with computed status (scheduled / live / completed) and participant count.
+- `POST /contests` — create. Rejects with `409 ContestOverlap` if the window intersects any existing scheduled/live contest.
+- `GET /contests/{id}` — detail with the resolved question list (hydrated from bbd_db).
+- `PATCH /contests/{id}` — partial update. Locked once the contest has started.
+- `DELETE /contests/{id}` — only allowed before start.
+- `GET /contests/{id}/participants` — leaderboard-ordered participants for the admin view.
+
+Passage-type questions are rejected at create time — the v1 contest grader and UI only handle the leaf types (single / multi / integer / matching).
 
 ---
 
