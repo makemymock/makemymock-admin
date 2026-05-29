@@ -1,0 +1,116 @@
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Floating tooltip rendered when the user hovers a data point. Positioned
+   via percentage offsets so it tracks the SVG even when the chart resizes
+   (the SVG uses preserveAspectRatio="none", so % maps consistently). */
+.tooltip {
+  position: absolute;
+  background: var(--color-panel-bg);
+  border: 1px solid var(--color-border-strong);
+  padding: 7px 11px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-family: var(--font-secondary);
+  color: var(--color-text-primary);
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32);
+  z-index: 5;
+  line-height: 1.4;
+}
+
+.tooltipTitle {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.tooltipMeta {
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tooltipValue {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dotted crosshair lines that follow the cursor anywhere inside the
+   chart bounds. Brighter than the regular grid lines so the eye picks
+   them out, but still subtle enough not to dominate the chart. */
+.crosshair {
+  stroke: var(--color-text-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: var(--font-secondary);
+}
+
+.gridLine {
+  stroke: var(--color-panel-border);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  opacity: 0.55;
+}
+
+.tickLabel {
+  fill: var(--color-text-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.axisLabel {
+  fill: var(--color-text-muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}

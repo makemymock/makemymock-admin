@@ -13,3 +13,8 @@ aiosmtplib==3.0.2
 httpx==0.27.2
 jinja2==3.1.4
 python-multipart
+# Observability page pulls Cloud Run / Vertex infra metrics straight
+# from Google Cloud Monitoring. The observability/infra endpoint
+# degrades gracefully (empty payload + explanatory error) when this
+# package is missing or the runtime SA lacks roles/monitoring.viewer.
+google-cloud-monitoring>=2.21.0,<3.0

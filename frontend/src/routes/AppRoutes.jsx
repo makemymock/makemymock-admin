@@ -7,6 +7,7 @@ import EmailComposer from '../pages/email/EmailComposer';
 import Questions from '../pages/questions/Questions';
 import Contests from '../pages/contests/Contests';
 import ContestForm from '../pages/contests/ContestForm';
+import Observability from '../pages/observability/Observability';
 import ProtectedRoute from './ProtectedRoute';
 import { tokenStorage } from '../utils/token';
 import AdminShell from '../components/layout/AdminShell';
@@ -47,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/contests" element={<Contests />} />
         <Route path="/contests/new" element={<ContestForm />} />
         <Route path="/contests/:contestId" element={<ContestForm />} />
+        <Route path="/observability" element={<Observability />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

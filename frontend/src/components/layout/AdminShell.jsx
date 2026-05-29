@@ -50,6 +50,12 @@ const Icon = {
       <path d="M10 17l5-5-5-5" /><path d="M15 12H4" /><path d="M21 4v16" />
     </svg>
   ),
+  Activity: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+         strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </svg>
+  ),
 };
 
 const NAV = [
@@ -58,6 +64,7 @@ const NAV = [
   { to: '/email', label: 'Email', Icon: Icon.Mail },
   { to: '/questions', label: 'Questions', Icon: Icon.Book },
   { to: '/contests', label: 'Contests', Icon: Icon.Trophy },
+  { to: '/observability', label: 'Observability', Icon: Icon.Activity },
 ];
 
 const AdminShell = () => {

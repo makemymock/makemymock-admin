@@ -62,6 +62,18 @@ class Settings(BaseSettings):
     # Max recipients accepted per single API request.
     PROMO_EMAIL_MAX_RECIPIENTS: int = 5000
 
+    # ---- Observability (GCP Cloud Monitoring) ----
+    # Project the Client backend runs in. The admin doesn't host
+    # anything in GCP itself — it just queries that project's metrics
+    # so the operator can see Cloud Run / Vertex AI health from one
+    # place. Leave blank to disable the infra page entirely (the
+    # observability/usage page still works — it reads from Mongo).
+    GCP_PROJECT_ID: str = ""
+    # Vertex AI region used by the Client; only relevant for label
+    # filters on per-model breakdowns. Defaults to "global" to match
+    # the Client setting.
+    GCP_LOCATION: str = "global"
+
 
 @lru_cache
 def get_settings() -> Settings:
