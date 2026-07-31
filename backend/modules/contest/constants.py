@@ -4,7 +4,7 @@
 CONTESTS_COLLECTION = "contests"
 
 # Questions DB collection (read-only — picker source).
-QUESTIONS_COLLECTION = "questions"
+QUESTIONS_COLLECTION = "questions_public"
 
 # Read-only collections in the primary DB. Owned by the Client backend's
 # contest module, but the admin reads them for the participants view.

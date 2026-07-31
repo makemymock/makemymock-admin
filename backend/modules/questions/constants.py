@@ -1,4 +1,4 @@
-QUESTIONS_COLLECTION = "questions"
+QUESTIONS_COLLECTION = "questions_public"
 
 # Valid question types from the Client engine (kept in sync with
 # `backend/modules/mock_test/grader.py`).

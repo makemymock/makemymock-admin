@@ -6,7 +6,7 @@ USERS_COLLECTION = "users"
 PROFILES_COLLECTION = "student_profiles"
 SESSIONS_COLLECTION = "mock_test_sessions"
 BATTLES_COLLECTION = "battles"
-QUESTIONS_COLLECTION = "questions"
+QUESTIONS_COLLECTION = "questions_public"
 
 
 class StatsRepository:
